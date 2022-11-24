@@ -228,12 +228,6 @@ export default {
       });
   },
   methods: {
-    sendSuccess() {
-      this.$message({ type: "success", message: "seccess" });
-    },
-    sendFail() {
-      this.$message({ type: "warning", message: "failed" });
-    },
     send() {
       if (!this.chatUser) {
         this.$message({ type: "warning", message: "请选择聊天对象" });
@@ -509,6 +503,7 @@ export default {
       document.getElementById("uploadFileName").value = e.target.value;
     },
     loadExcel() {
+      let that = this;
       let spread = this.spread;
       let excelIo = new ExcelIO.IO();
       let excelFile = this.importExcelFile;
@@ -518,15 +513,16 @@ export default {
           spread.fromJSON(json);
           document.getElementById("exportFileName").value = excelFile.name;
           document.getElementById("uploadFileName").value = excelFile.name;
-          sendSuccess();
+          that.sendSuccess();
         },
         function (error) {
           console.log(error);
-          sendFail();
+          that.sendFail();
         }
       );
     },
     saveExcel() {
+      let that = this;
       let spread = this.spread;
       let excelIo = new ExcelIO.IO();
       let fileName =
@@ -539,11 +535,11 @@ export default {
         json,
         function (blob) {
           saveAs(blob, fileName);
-          sendSuccess();
+          that.sendSuccess();
         },
         function (error) {
           console.log(error);
-          sendFail();
+          that.sendFail();
         }
       );
     },
@@ -576,6 +572,7 @@ export default {
       }
     },
     upload() {
+      let that = this;
       this.user = sessionStorage.getItem("user")
         ? JSON.parse(sessionStorage.getItem("user"))
         : {};
@@ -601,10 +598,10 @@ export default {
 
           xhr.onload = function (e) {
             if (this.status == 200) {
-              this.sendSuccess();
+              that.sendSuccess();
             } else {
-              this.sendFail();
               console.log("failed");
+              that.sendFail();
             }
           };
           xhr.send(data);
@@ -615,6 +612,7 @@ export default {
       );
     },
     download(row) {
+      let that = this;
       console.log(row);
       let excelIo = new ExcelIO.IO();
       let spread = this.spread;
@@ -633,14 +631,22 @@ export default {
               spread.fromJSON(workbookObj);
               document.getElementById("exportFileName").value = row.filename;
               document.getElementById("uploadFileName").value = row.filename;
+              that.sendSuccess();
             },
             function (e) {
               console.log(e.errorMessage);
+              that.sendFail();
             }
           );
         }
       };
       xhr.send(data);
+    },
+    sendSuccess() {
+      this.$message({ type: "success", message: "seccess", showClose: true });
+    },
+    sendFail() {
+      this.$message({ type: "warning", message: "failed", showClose: true });
     },
   },
 };

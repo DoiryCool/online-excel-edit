@@ -13,7 +13,7 @@
             style="width: 56px; height: 56px; color: #409eff"
           ></svg-icon>
         </div>
-        <h2 class="login-title color-main">mall-admin-web</h2>
+        <h2 class="login-title color-main">Login</h2>
         <el-form-item prop="username">
           <el-input
             name="username"
@@ -37,10 +37,10 @@
             placeholder="请输入密码"
           >
             <span slot="prefix">
-              <svg-icon icon-class="password" class="color-main"></svg-icon>
+              <el-icon><Key /></el-icon>
             </span>
             <span slot="suffix" @click="showPwd">
-              <svg-icon icon-class="eye" class="color-main"></svg-icon>
+              <el-icon><View /></el-icon>
             </span>
           </el-input>
         </el-form-item>
