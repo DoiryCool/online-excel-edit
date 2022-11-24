@@ -1,4 +1,4 @@
-let ip = "20.160.144.194";
+let ip = "xxx.xxx.xxx.xxx";
 let back_port = "8181"
 export {
     ip,
