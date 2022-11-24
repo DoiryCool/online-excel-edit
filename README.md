@@ -1,6 +1,7 @@
-# vistaweb
+# Online Excel Edit Web
 
-This template should help get you started developing with Vue 3 in Vite.
+This is online edit system built in 5 days.
+Here you can upload your excel file to the cloud,and you can edit together your *mates online.
 
 ## Recommended IDE Setup
 
@@ -27,3 +28,8 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Set the back-end address
+You should set back-end ip address and port in `config/configs.js`
+## Demo
+![SHOW](./show.png)
