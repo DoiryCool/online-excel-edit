@@ -1,9 +1,8 @@
-import axios from 'axios' //引入 axios
-//import baseUrl from '../api/baseUrl' //使用环境变量 + 模式的方式定义基础URL
- 
-// 创建 axios 实例
+import axios from 'axios' 
+import { back_port , ip} from '../config/configs'
+
 const service = axios.create({
-  baseURL: 'http://20.160.144.194:8181', // api 的 base_url
+  baseURL: 'http://' + ip + ':' + back_port,
   timeout: 15000, // 请求超时时间
 })
  

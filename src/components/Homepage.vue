@@ -182,7 +182,7 @@ import * as GC from "@grapecity/spread-sheets";
 import * as ExcelIO from "@grapecity/spread-excelio";
 import { saveAs } from "file-saver";
 import axios from "axios";
-// import { HttpStatusCode } from "axios";
+import { back_port , ip} from '../config/configs'
 
 import { sendSock, createWebSocket, closeSock } from "@/api/socket";
 GC.Spread.Common.CultureManager.culture("zh-ch");
@@ -216,7 +216,7 @@ export default {
   created() {
     this.init();
     axios
-      .post("http://20.160.144.194:8181/api/files/all")
+      .post("http://" + ip + ":" + back_port + "/api/files/all")
       .then((response) => {
         this.tableData = response.data;
       })
@@ -300,7 +300,7 @@ export default {
       let username = this.user.username;
 
       createWebSocket(username, this.global_callback);
-      let socketUrl = "ws://20.160.144.194:8181/socket/imserver/" + username;
+      let socketUrl = "ws://" + ip + ":" + back_port + "/socket/imserver/" + username;
       if (socket != null) {
         socket.close();
         socket = null;
@@ -594,7 +594,7 @@ export default {
           data.append("fileName", fileName);
           data.append("file", blob);
           let xhr = new XMLHttpRequest();
-          xhr.open("POST", "http://20.160.144.194:8181/api/upload", true);
+          xhr.open("POST", "http://" + ip + ":" + back_port + "/api/upload", true);
 
           xhr.onload = function (e) {
             if (this.status == 200) {
@@ -619,7 +619,7 @@ export default {
       let data = new FormData();
       data.append("filePath", row.path);
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://20.160.144.194:8181/api/download", true);
+      xhr.open("POST", "http://" + ip + ":" + back_port + "/api/download", true);
       xhr.responseType = "blob";
       xhr.onload = function (e) {
         if (this.status == 200) {

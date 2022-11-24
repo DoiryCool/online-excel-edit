@@ -71,8 +71,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: "admin",
-        password: "123456",
+        username: "",
+        password: "",
       },
       loading: false,
       pwdType: "password",
@@ -99,12 +99,14 @@ export default {
                 var obj = {
                   username: this.loginForm.username,
                 };
+                this.$message({ type: "success", message: "login success", showClose: true });
                 sessionStorage.setItem("user", JSON.stringify(obj));
                 this.$router.push({
                   path: "/Homepage",
                   query: { data: response.data.data },
                 });
               } else {
+                this.$message({ type: "warning", message: "login failed", showClose: true });
                 this.$router.push({
                   path: "/Login",
                   query: { message: response.data.description },

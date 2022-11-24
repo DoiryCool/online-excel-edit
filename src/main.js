@@ -9,9 +9,10 @@ import store from './store'
 import VueCookies from 'vue-cookies'
 import { GcSpreadSheets, GcWorksheet, GcColumn } from '@grapecity/spread-sheets-vue'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-// import { Designer } from "@grapecity/spread-sheets-designer-vue"
+import { back_port , ip} from './config/configs'
+
 import axios from 'axios'
-axios.defaults.baseURL = 'http://20.160.144.194:8181'
+axios.defaults.baseURL = 'http://' + ip + ':' + back_port;
 
 const app = createApp(App)
 app.component('gc-spread-sheets', GcSpreadSheets);
@@ -22,5 +23,3 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(router).use(store).use(VueCookies).use(ElementPlus, { locale }).mount('#app')
 app.config.globalProperties.$http = axios
-
-//this.$cookies.config("1d","/") //set cookies time = 1d & "/"
