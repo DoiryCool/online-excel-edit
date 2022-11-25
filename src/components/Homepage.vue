@@ -1,3 +1,5 @@
+<!-- author:Catw1thu -->
+
 <template>
   <el-container>
     <!-- <el-header class="nav">Router</el-header> -->
@@ -182,7 +184,7 @@ import * as GC from "@grapecity/spread-sheets";
 import * as ExcelIO from "@grapecity/spread-excelio";
 import { saveAs } from "file-saver";
 import axios from "axios";
-import { back_port , ip} from '../config/configs'
+import { back_port, ip } from "../config/configs";
 
 import { sendSock, createWebSocket, closeSock } from "@/api/socket";
 GC.Spread.Common.CultureManager.culture("zh-ch");
@@ -300,7 +302,8 @@ export default {
       let username = this.user.username;
 
       createWebSocket(username, this.global_callback);
-      let socketUrl = "ws://" + ip + ":" + back_port + "/socket/imserver/" + username;
+      let socketUrl =
+        "ws://" + ip + ":" + back_port + "/socket/imserver/" + username;
       if (socket != null) {
         socket.close();
         socket = null;
@@ -594,7 +597,11 @@ export default {
           data.append("fileName", fileName);
           data.append("file", blob);
           let xhr = new XMLHttpRequest();
-          xhr.open("POST", "http://" + ip + ":" + back_port + "/api/upload", true);
+          xhr.open(
+            "POST",
+            "http://" + ip + ":" + back_port + "/api/upload",
+            true
+          );
 
           xhr.onload = function (e) {
             if (this.status == 200) {
@@ -619,7 +626,11 @@ export default {
       let data = new FormData();
       data.append("filePath", row.path);
       let xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://" + ip + ":" + back_port + "/api/download", true);
+      xhr.open(
+        "POST",
+        "http://" + ip + ":" + back_port + "/api/download",
+        true
+      );
       xhr.responseType = "blob";
       xhr.onload = function (e) {
         if (this.status == 200) {
